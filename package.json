@@ -1,0 +1,24 @@
+{
+  "name": "dhanhq",
+  "version": "1.0.0",
+  "description": "DhanHQ API Library for node js to trade with DhanHQ API's.",
+  "author": "Vinay S",
+  "main": "./lib/index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "Dhan",
+    "DhanHQ",
+    "DhanHQ API",
+    "trading"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinay-sd17/DhanHQ-js.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vinay-sd17/DhanHQ-js/issues"
+  },
+  "homepage": "https://github.com/vinay-sd17/DhanHQ-js#readme"
+}
