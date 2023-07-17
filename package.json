@@ -2,9 +2,18 @@
   "name": "dhanhq",
   "version": "1.0.0",
   "description": "DhanHQ API Library for node js to trade with DhanHQ API's.",
-  "author": "Vinay S",
-  "main": "./lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.m.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "default": "./dist/index.modern.js"
+  },
   "scripts": {
+    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap",
+    "dev": "microbundle --watch --tsconfig tsconfig.json --no-sourcemap",
+    "tsc": "npm run tsc -w --no-initial-compille"
   },
   "keywords": [
     "Dhan",
@@ -12,6 +21,7 @@
     "DhanHQ API",
     "trading"
   ],
+  "author": "Vinay S",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vinay-sd17/DhanHQ-js.git"
@@ -20,5 +30,15 @@
   "bugs": {
     "url": "https://github.com/vinay-sd17/DhanHQ-js/issues"
   },
-  "homepage": "https://github.com/vinay-sd17/DhanHQ-js#readme"
+  "devDependencies": {
+    "microbundle": "0.15.0"
+  },
+  "dependencies": {
+    "dhanhq": "^1.0.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "typescript": "^4.6.3"
+  },
+  "files": [
+    "dist"
+  ]
 }
