@@ -12,13 +12,9 @@ NodeJS client for communicating with the DhanHQ API.
 
 ## Installation
 
-Install via [npm](https://www.npmjs.com/package/kiteconnect)
+Install via [npm](https://www.npmjs.com/package/dhanhq)
 
     npm install dhanhq@latest
-
-Or via [yarn](https://yarnpkg.com/package/kiteconnect)
-
-    yarn add dhanhq
 
 ## Getting started with API
 
