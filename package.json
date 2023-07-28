@@ -24,11 +24,11 @@
   "author": "Vinay S",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinay-sd17/DhanHQ-js.git"
+    "url": "git+https://github.com/dhan-oss/DhanHQ-js.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vinay-sd17/DhanHQ-js/issues"
+    "url": "https://github.com/dhan-oss/DhanHQ-js/issues"
   },
   "devDependencies": {
     "microbundle": "0.15.0"
