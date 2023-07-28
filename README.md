@@ -1,5 +1,7 @@
 # DhanHQ-js : v1.0
 
+[![npm js](https://img.shields.io/npm/v/dhanhq.svg)](https://www.npmjs.com/package/dhanhq)
+
 NodeJS client for communicating with the DhanHQ API.
 
 DhanHQ-js library can be used to integrate with Trading and Data APIs faster. Execute orders in real time along with position management, historical data, tradebook and more with simple API collection.
