@@ -18,28 +18,6 @@ Install via [npm](https://www.npmjs.com/package/dhanhq)
 
 ## Getting started with API
 
-## JS
-
-```javascript
-var sdk = require("dhanhq");
-
-const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
-const DHAN_CLIENT_ID = process.env.DHAN_CLIENT_ID;
-
-const client = new sdk.DhanHqClient({
-    accessToken: ACCESS_TOKEN,
-    env: "PROD"
-});
-
-function getHoldings() {
-    client.getHoldings().then(response => {
-        console.log(response);
-    }, err => {
-        console.log(err)
-    })
-}
-```
-
 ## TS
 
 ```typescript
