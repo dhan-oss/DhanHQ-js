@@ -1,6 +1,6 @@
 {
   "name": "dhanhq",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DhanHQ API Library for node js to trade with DhanHQ API's.",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
