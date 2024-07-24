@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/demo.js"
+    "start": "tsc && node dist/demo.js",
+    "mf-ticker": "tsc && type=ticker node dist/marketfeed-demo.js",
+    "mf-depth": "tsc && type=depth node dist/marketfeed-demo.js",
+    "mf-quote": "tsc && type=quote node dist/marketfeed-demo.js"
   },
   "dependencies": {
-    "dhanhq": "1.0.1",
+    "dhanhq": "^1.0.3",
     "dotenv": "^16.0.3",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
