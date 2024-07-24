@@ -1,4 +1,4 @@
-# DhanHQ-js : v1.0
+# DhanHQ-js : v1.0.2
 
 [![npm js](https://img.shields.io/npm/v/dhanhq.svg)](https://www.npmjs.com/package/dhanhq)
 
