@@ -55,11 +55,11 @@ export class DhanFeed {
     accessToken: string;
     instruments: any[];
     subscriptionCode: number;
-    onConnect: any;
-    onMessage: any;
-    onClose: any;
-    ws: WebSocket | null;
-    sdkHelper: DhanSDKHelper;
+    private onConnect: any;
+    private onMessage: any;
+    private onClose: any;
+    private ws: WebSocket | null;
+    private sdkHelper: DhanSDKHelper;
 
     constructor(clientId: string, accessToken: string, instruments: any[], subscriptionCode: number, onConnect: any = null, onMessage: any = null, onClose: any = null) {
         this.clientId = clientId;
@@ -142,13 +142,13 @@ export class DhanFeed {
         }
     }
 
-    async send(payload: any) {
+    private async send(payload: any) {
         if (this.ws) {
             this.ws.send(payload);
         }
     }
 
-    createHeader(feedRequestCode: number, messageLength: number, clientId: string) {
+    private createHeader(feedRequestCode: number, messageLength: number, clientId: string) {
         const header = Buffer.alloc(83);
         header.writeInt16LE(feedRequestCode, 0);
         header.writeInt32LE(messageLength, 2);
@@ -156,7 +156,7 @@ export class DhanFeed {
         return header;
     }
 
-    async subscribeSymbols(feedRequestCode: number, symbols: any[]) {
+    private async subscribeSymbols(feedRequestCode: number, symbols: any[]) {
         const uniqueSymbolsSet = new Set(this.instruments);
         symbols.forEach(symbol => uniqueSymbolsSet.add(symbol));
         this.instruments = Array.from(uniqueSymbolsSet);
@@ -166,7 +166,18 @@ export class DhanFeed {
         }
     }
 
-    createSubscriptionPacket(instruments: [number, string][], feedRequestCode: number, status: boolean): Buffer {
+    async subscribe(feedRequestCode: number, symbols: any[]) {
+        const instruments = this.instruments;
+        const partitions = Math.ceil(instruments.length / 100);
+        for (let i = 0; i < partitions; i++) {
+            const start = i * 100;
+            const end = Math.min((i + 1) * 100, instruments.length);
+            const symbols = instruments.slice(start, end);
+            await this.subscribeSymbols(this.subscriptionCode, symbols);
+        }
+    }
+
+    private createSubscriptionPacket(instruments: [number, string][], feedRequestCode: number, status: boolean): Buffer {
         const numInstruments = instruments.length;
         const actualFeedRequestCode = status ? this.subscriptionCode : this.subscriptionCode + 1;
 
@@ -190,7 +201,7 @@ export class DhanFeed {
         return subscriptionPacket;
     }
 
-    async unsubscribeSymbols(feedRequestCode: number, symbols: any) {
+    async unsubscribe(feedRequestCode: number, symbols: any) {
         this.instruments = this.instruments.filter(instrument =>
             !symbols.some(symbol =>
                 symbol[0] === instrument[0] && symbol[1] === instrument[1]
@@ -204,7 +215,7 @@ export class DhanFeed {
         }
     }
 
-    createUnsubscribePacket(feedRequestCode: number, instruments: [number, string][]): Buffer {
+    private createUnsubscribePacket(feedRequestCode: number, instruments: [number, string][]): Buffer {
         const numInstruments = instruments.length;
         const unsubscribeCode = feedRequestCode + 1; // Assuming unsubscribe code is feedRequestCode + 1
 
