@@ -12,4 +12,6 @@ applyMixins(DhanHqClient, [RestClient]);
 
 export {DhanHqClient as DhanHqClient};
 
+export * from './marketfeed'
+
 export * from './types'
