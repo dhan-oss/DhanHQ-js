@@ -20,7 +20,8 @@ const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const DHAN_CLIENT_ID = process.env.DHAN_CLIENT_ID;
 
 const instruments = [
-    [MCX, '428869']
+    [MCX, '428869'],
+    [NSE_FNO, '65378']
 ];
 
 let type = process.env['type'];
