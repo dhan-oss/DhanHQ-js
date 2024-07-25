@@ -247,3 +247,137 @@ export enum PositionType {
     CLOSED = "CLOSED"
 }
 
+export class DepthLevel {
+    bidOrders: number;
+    bidQuantity: number;
+    bidPrice: number;
+    askPrice: number;
+    askQuantity: number;
+    askOrders: number;
+
+    constructor(bidOrders: number, bidQuantity: number, bidPrice: number, askPrice: number, askQuantity: number, askOrders: number) {
+        this.bidOrders = bidOrders;
+        this.bidQuantity = bidQuantity;
+        this.bidPrice = bidPrice;
+        this.askPrice = askPrice;
+        this.askQuantity = askQuantity;
+        this.askOrders = askOrders;
+    }
+}
+
+export class QuoteResponse {
+    type: string;
+    responseCode: number;
+    securityId: number;
+    ltp: number;
+    ltq: number;
+    ltt: string;
+    atp: number;
+    volume: number;
+    totalSellQuantity: number;
+    totalBuyQuantity: number;
+    openPrice: number;
+    closePrice: number;
+    highPrice: number;
+    lowPrice: number;
+
+    constructor(type: string, responseCode: number, securityId: number, ltp: number, ltq: number, ltt: string, atp: number, volume: number, totalSellQuantity: number, totalBuyQuantity: number, openPrice: number, closePrice: number, highPrice: number, lowPrice: number) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.securityId = securityId;
+        this.ltp = ltp;
+        this.ltq = ltq;
+        this.ltt = ltt;
+        this.atp = atp;
+        this.volume = volume;
+        this.totalSellQuantity = totalSellQuantity;
+        this.totalBuyQuantity = totalBuyQuantity;
+        this.openPrice = openPrice;
+        this.closePrice = closePrice;
+        this.highPrice = highPrice;
+        this.lowPrice = lowPrice;
+    }
+}
+
+export class OiDataResponse {
+    type: string;
+    responseCode: number;
+    exchangeSegment: number;
+    securityId: number;
+    openInterest: number;
+
+    constructor(type: string, responseCode: number, exchangeSegment: number, securityId: number, openInterest: number) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.exchangeSegment = exchangeSegment;
+        this.securityId = securityId;
+        this.openInterest = openInterest;
+    }
+
+}
+
+export class MarketStatusResponse {
+    type: string;
+    responseCode: number;
+    status: string;
+
+    constructor(type: string, responseCode: number, status: string) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.status = status;
+    }
+}
+
+export class MarketDepthResponse {
+    type: string;
+    responseCode: number;
+    ltp: number;
+    depthLevels: DepthLevel[];
+
+    constructor(type: string, responseCode: number, ltp: number, depthLevels: DepthLevel[]) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.ltp = ltp;
+        this.depthLevels = depthLevels;
+    }
+}
+
+export class PrevCloseResponse {
+    type: string;
+    responseCode: number;
+    exchangeSegment: number;
+    securityId: number;
+    prevClosePrice: number;
+    prevOpenInterest: number;
+
+    constructor(type: string, responseCode: number, exchangeSegment: number, securityId: number, prevClosePrice: number, prevOpenInterest: number) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.exchangeSegment = exchangeSegment;
+        this.securityId = securityId;
+        this.prevClosePrice = prevClosePrice;
+        this.prevOpenInterest = prevOpenInterest;
+    }
+
+}
+
+export class TickerResponse {
+    type: string;
+    responseCode: number;
+    exchangeSegment: number;
+    securityId: number;
+    ltp: number;
+    ltt: string;
+
+    constructor(type: string, responseCode: number, exchangeSegment: number, securityId: number, ltp: number, ltt: string) {
+        this.type = type;
+        this.responseCode = responseCode;
+        this.exchangeSegment = exchangeSegment;
+        this.securityId = securityId;
+        this.ltp = ltp;
+        this.ltt = ltt;
+    }
+
+}
+
+
