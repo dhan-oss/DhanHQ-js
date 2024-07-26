@@ -1,6 +1,6 @@
 {
   "name": "dhanhq",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "DhanHQ API Library for node js to trade with DhanHQ API's.",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
@@ -8,12 +8,12 @@
   "types": "dist/index.d.ts",
   "exports": {
     "require": "./dist/index.js",
-    "default": "./dist/index.modern.js"
+    "default": "./dist/index.m.js"
   },
   "scripts": {
     "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap",
     "dev": "microbundle --watch --tsconfig tsconfig.json --no-sourcemap",
-    "tsc": "npm run tsc -w --no-initial-compille"
+    "tsc": "npm run tsc -w --no-initial-compile"
   },
   "keywords": [
     "Dhan",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "bufferutil": "^4.0.8",
     "isomorphic-unfetch": "^3.1.0",
     "typescript": "^4.6.3",
     "ws": "^8.18.0"
