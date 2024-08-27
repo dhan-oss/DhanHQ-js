@@ -167,13 +167,12 @@ export class DhanFeed {
     }
 
     async subscribe(feedRequestCode: number, symbols: any[]) {
-        const instruments = this.instruments;
-        const partitions = Math.ceil(instruments.length / 100);
+        const partitions = Math.ceil(symbols.length / 100);
         for (let i = 0; i < partitions; i++) {
             const start = i * 100;
-            const end = Math.min((i + 1) * 100, instruments.length);
-            const symbols = instruments.slice(start, end);
-            await this.subscribeSymbols(this.subscriptionCode, symbols);
+            const end = Math.min((i + 1) * 100, symbols.length);
+            const symbolBatch = symbols.slice(start, end);
+            await this.subscribeSymbols(feedRequestCode, symbolBatch);
         }
     }
 
