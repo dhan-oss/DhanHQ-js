@@ -1,4 +1,4 @@
-# DhanHQ-js : v1.0.5
+# DhanHQ-js : v1.0.6
 
 [![npm js](https://img.shields.io/npm/v/dhanhq.svg)](https://www.npmjs.com/package/dhanhq)
 
@@ -16,7 +16,7 @@ Dhan (c) 2022. Licensed under the MIT License
 - [DhanHQ API documentation](https://dhanhq.co/docs/v1/)
 - [DhanHQ Developer Kit](https://api.dhan.co/)
 
-### v1.0.5 - What's New
+### v1.0.6 - What's New
 
 Live Market Feed data is now available across exchanges and segments via DhanHQ
 
