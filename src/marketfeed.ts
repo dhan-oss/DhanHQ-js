@@ -73,6 +73,42 @@ export class DhanFeed {
         this.sdkHelper = new DhanSDKHelper(this);
     }
 
+    padWithZeros(buffer: Buffer, length: number): Buffer {
+        if (buffer.length < length) {
+            const padding = Buffer.alloc(length - buffer.length, 0);
+            return Buffer.concat([buffer, padding]);
+        }
+        return buffer;
+    }
+
+    async authorize(): Promise<void> {
+        try {
+            console.log("Authorizing your token...");
+            let apiAccessToken = Buffer.from(this.accessToken, 'utf-8');
+            apiAccessToken = this.padWithZeros(apiAccessToken, 500);
+            const authenticationType = Buffer.from("2P", 'utf-8');
+            const payload = Buffer.concat([apiAccessToken, authenticationType]);
+
+            const feedRequestCode = 11;
+            const messageLength = 83 + apiAccessToken.length + authenticationType.length;
+            let clientIdBuffer = Buffer.from(this.clientId, 'utf-8');
+            clientIdBuffer = this.padWithZeros(clientIdBuffer, 30);
+            const dhanAuth = Buffer.alloc(50, 0);
+            const header = Buffer.alloc(83);
+            header.writeUInt8(feedRequestCode, 0);
+            header.writeUInt16LE(messageLength, 1);
+            clientIdBuffer.copy(header, 3, 0, 30);
+            dhanAuth.copy(header, 33, 0, 50);
+
+            const authorizationPacket = Buffer.concat([header, payload]);
+
+            await this.ws.send(authorizationPacket);
+            console.log("Authorization successful!");
+        } catch (error) {
+            console.log(`Authorization failed: ${error}`);
+        }
+    }
+
     async connect() {
         if (this.accessToken === '' || this.clientId === '') {
             console.error('Access Token or Client ID is missing');
@@ -94,6 +130,8 @@ export class DhanFeed {
         });
 
         this.ws.on('open', async () => {
+            await this.authorize();
+            console.log('WebSocket connection established & authorized successfully');
             await this.sdkHelper.onConnectionEstablished(this.ws!);
         });
 
@@ -363,26 +401,26 @@ export class DhanFeed {
     }
 
     private processServerDisConnectionPacket(data: Buffer) {
-        if (data.length >= 1) {
-            const errorCode = data.readUInt16LE(9);
-            switch (errorCode) {
-                case 805:
-                    console.log("Connection limit exceeded");
-                    break;
-                case 806:
-                    console.log("Data APIs not subscribed");
-                    break;
-                case 807:
-                    console.log("Access token is expired");
-                    break;
-                case 808:
-                    console.log("Authentication Failed - Check Client ID");
-                    break;
-                case 809:
-                    console.log("Access token is invalid");
-                    break;
-            }
-            this.close();
+        const errorCode = data.readUInt16LE(8);
+        switch (errorCode) {
+            case 805:
+                console.log("Connection limit exceeded, Please close existing connection to create new connection");
+                break;
+            case 806:
+                console.log("Data APIs not subscribed, Please subscribe tp continue using Market Feed APIs");
+                break;
+            case 807:
+                console.log("Access token is expired, Please generate new access token");
+                break;
+            case 808:
+                console.log("Authentication Failed - Check Client ID and Access Token");
+                break;
+            case 809:
+                console.log("Access token is invalid or not found, Please generate new access token");
+                break;
+            default:
+                console.log("Disconnected: Unknown reason for disconnection");
         }
+        this.close();
     }
 }
