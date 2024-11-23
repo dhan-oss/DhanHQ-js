@@ -47,6 +47,9 @@ class DhanSDKHelper {
         console.log(`WebSocket closed with status ${closeStatus}: ${closeMsg}`);
         websocket.close();
         this.sdkInstance.ws = null;
+        if (this.sdkInstance.onClose) {
+            await this.sdkInstance.onClose(this.sdkInstance);
+        }
     }
 }
 
